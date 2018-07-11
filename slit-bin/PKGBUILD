@@ -1,0 +1,29 @@
+# Maintainer: Shadab Zafar <dufferzafar0@gmail.com>
+
+pkgname=slit-bin
+pkgver=1.2.0
+pkgrel=1
+pkgdesc="A modern PAGER for viewing logs, get more than most in less time."
+arch=("x86_64" "i386")
+url="https://github.com/tigrawap/slit"
+license=("MIT")
+provides=("slit")
+conflicts=("slit")
+
+source_i686=("https://github.com/tigrawap/slit/releases/download/1.2.0/slit_linux_386")
+source_x86_64=("https://github.com/tigrawap/slit/releases/download/1.2.0/slit_linux_amd64")
+sha256sums_i686=("6e494e73e2b975fb57d7debccf5b71d064b0dfb2dc3e6d8257e71d4619b82eb2")
+sha256sums_x86_64=("ffd962d09c22bedf1077e880a7f73c0968743c87d4cee0347ef6aaefcd10a5bb")
+
+case "$CARCH" in
+  arm*) _pkgarch="arm"
+	;;
+  i686) _pkgarch="386"
+	;;
+  x86_64) _pkgarch="amd64"
+	;;
+esac
+
+package() {
+  install -Dm755 "${srcdir}/${pkgname/-bin}_linux_${_pkgarch}" "${pkgdir}/usr/bin/${pkgname/-bin}"
+}
