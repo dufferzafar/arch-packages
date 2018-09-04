@@ -1,0 +1,23 @@
+# Maintainer: Shadab Zafar <dufferzafar0@gmail.com>
+
+pkgname=jump-bin
+pkgver=0.20.0
+pkgrel=1
+pkgdesc="jump helps you navigate faster by learning your habits."
+arch=("x86_64" "i386")
+url="https://github.com/gsamokovarov/jump"
+license=("MIT")
+provides=("jump")
+conflicts=("jump")
+
+source_x86_64=("https://github.com/gsamokovarov/jump/releases/download/v0.20.0/jump_linux_amd64_binary")
+sha256sums_x86_64=("SKIP")
+
+case "$CARCH" in
+  x86_64) _pkgarch="amd64"
+	;;
+esac
+
+package() {
+  install -Dm755 "${srcdir}/${pkgname/-bin}_linux_${_pkgarch}_binary" "${pkgdir}/usr/bin/${pkgname/-bin}"
+}
